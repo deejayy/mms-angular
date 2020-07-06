@@ -2,7 +2,7 @@
   <div class="mmscreen-header">
     <div class="name">Csaba SZELL</div>
     <div class="controls">
-      <button class="new-member">New member</button>
+      <button class="new-member" (click)="displayModal($event)">New member</button>
     </div>
   </div>
 
@@ -34,17 +34,17 @@
         </div>
       </div>
       <div class="footnote">
-        <a href='#'>Add new member</a>
+        <a href='' (click)="displayModal($event)">Add new member</a>
       </div>
     </div>
   </div>
 </div>
 
-<div class="modal" *ngIf="showModal">
+<div class="modal" *ngIf="showModal" (click)="overlayClick($event)">
   <div class="modal-wrapper">
     <div class="modal-header">
       <div class="modal-title">Create member</div>
-      <div class="modal-close">
+      <div class="modal-close" (click)="closeModal($event)">
         <img class="close-icon" src="https://d1icd6shlvmxi6.cloudfront.net/gsc/5GQ71W/9c/3e/a0/9c3ea0c23cea404fb49d1e89ce31b1e2/images/membership_management_screen/u33.svg?token=8f4d6803befe5998c758feb46f0f47faa758f34230d5bd7092fadb3a03127242" alt="Clsoe modal">
       </div>
     </div>
@@ -82,7 +82,7 @@
       </form>
     </div>
     <div class="modal-controls">
-      <div class="cancel-text">Cancel</div>
+      <div class="cancel-text" (click)="closeModal($event)">Cancel</div>
       <button class="create-member-button">Create member</button>
     </div>
   </div>

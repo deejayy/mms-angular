@@ -11,4 +11,20 @@ export class MmscreenComponent implements OnInit {
   constructor() {}
 
   public ngOnInit() {}
+
+  public closeModal(event: MouseEvent) {
+    this.showModal = false;
+  }
+
+  public overlayClick(event: MouseEvent) {
+    const clickedElementClass = (<HTMLElement>event.target).className;
+    if (clickedElementClass === 'modal') {
+      this.closeModal(event);
+    }
+  }
+
+  public displayModal(event: MouseEvent) {
+    this.showModal = true;
+    event.preventDefault();
+  }
 }
