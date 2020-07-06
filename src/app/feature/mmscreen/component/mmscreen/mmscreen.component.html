@@ -3,6 +3,7 @@
     <div class="name">Csaba SZELL</div>
     <div class="controls">
       <button class="new-member" (click)="displayModal($event)">New member</button>
+      <button class="create-member-button">Save Changes</button>
     </div>
   </div>
 
@@ -16,17 +17,17 @@
       <div class="table-row">
         <div class="member">
           <select class="select member-select" name="" id="">
-            <option value="">name1</option>
+            <option *ngFor="let user of data" [value]='user.person_id'>{{ user.lastname }} {{ user.firstname }}</option>
           </select>
         </div>
         <div class="role">
           <select class="select role-select" name="" id="">
-            <option value="">name1</option>
+            <option *ngFor="let role of roles" [value]="role.value">{{ role.name }}</option>
           </select>
         </div>
         <div class="access-level">
           <select class="select access-level-select" name="" id="">
-            <option value="">name1</option>
+            <option *ngFor="let accessLevel of accessLevels" [value]="accessLevel.value">{{ accessLevel.name }}</option>
           </select>
         </div>
         <div class="remove">
