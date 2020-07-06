@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./mmscreen.component.scss'],
 })
 export class MmscreenComponent implements OnInit {
-  public showModal: boolean = true;
+  public showModal: boolean = false;
 
   constructor() {}
 

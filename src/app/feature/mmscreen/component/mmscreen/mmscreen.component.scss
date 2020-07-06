@@ -1,7 +1,7 @@
 @import "app-theme.scss";
 
 .mmscreen {
-  width: 1140px;
+  width: 1168px;
   padding: 14px;
   margin: 0 auto;
 
@@ -97,6 +97,9 @@
 .remove {
   cursor: pointer;
   padding: 10px;
+  display: flex;
+  justify-content: flex-end;
+  flex-grow: 1;
 
   &-icon {
     width: 15px;
