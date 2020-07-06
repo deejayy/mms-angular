@@ -7,6 +7,10 @@ const routes: Routes = [
     path: '',
     component: AppFrameComponent,
   },
+  {
+    path: 'mmscreen',
+    loadChildren: () => import('./feature/mmscreen/mmscreen.module').then(m => m.MmscreenModule),
+  },
 ];
 
 @NgModule({
