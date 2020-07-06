@@ -112,3 +112,122 @@
   background-color: rgba(255, 255, 255, 1);
   border-bottom: 1px solid rgba(235, 235, 235, 1);
 }
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(51, 51, 51, 0.25);
+  display: flex;
+
+  &-wrapper {
+    width: 850px;
+    min-height: 470px;
+    padding: 16px;
+    margin: auto;
+    background-color: rgba(255, 255, 255, 1);
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  &-title {
+    font-size: 18px;
+    flex-grow: 1;
+  }
+
+  &-close {
+    cursor: pointer;
+    padding: 5px;
+  }
+
+  &-form {
+    display: flex;
+  }
+
+  &-content {
+    flex-grow: 1;
+  }
+
+  &-controls {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 20px;
+    align-items: center;
+  }
+}
+
+.section-left {
+  width: 50%;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-right: 20px;
+  border-right: 1px solid rgba(170, 170, 170, 0.5);
+}
+
+.section-right {
+  flex-grow: 1;
+  padding-right: 20px;
+}
+
+.input-block {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+
+  & .text-input {
+    padding: 3px 2px 3px 2px;
+    font-size: 13px;
+    border: 1px solid rgba(170, 170, 170, 0.5);
+  }
+}
+
+.checkbox {
+  width: 20px;
+  height: 20px;
+  margin: 0 6px 0 0;
+  color: rgba(170, 170, 170, 1);
+
+  &-block {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+  }
+
+  &-note {
+    font-size: 12px;
+    color: rgba(170, 170, 170, 1);
+  }
+}
+
+.required {
+  color: rgba(221, 0, 0, 1);
+}
+
+.create-member-button {
+  width: 140px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  background-color: rgba(22, 155, 213, 1);
+  border: none;
+  border-radius: 5px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 1);
+  cursor: pointer;
+  margin-left: 25px;
+}
+
+.cancel-text {
+  padding: 4px 0;
+  cursor: pointer;
+}
