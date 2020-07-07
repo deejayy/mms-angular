@@ -225,3 +225,11 @@
   padding: 4px 0;
   cursor: pointer;
 }
+
+.add-new-setting {
+  &.disabled {
+    color: rgba(170, 170, 170, 1);
+    text-decoration: none;
+    cursor: default;
+  }
+}

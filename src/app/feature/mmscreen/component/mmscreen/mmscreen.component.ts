@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
-import { of, Observable, BehaviorSubject } from 'rxjs';
+import { of, Observable, BehaviorSubject, combineLatest } from 'rxjs';
 import { MemberSetComponent } from '../member-set/member-set.component';
+import { take, map } from 'rxjs/operators';
 
 export interface DataRow {
   person_id: string;
@@ -23,6 +24,8 @@ export interface MemberSetting {
   styleUrls: ['./mmscreen.component.scss'],
 })
 export class MmscreenComponent implements OnInit {
+  public disableNewSetting$: Observable<boolean> = of(false);
+
   public data$: Observable<DataRow[]> = of([
     {
       person_id: '7e3b1912-efb8-41bd-851f-e7f5a45341e9',
@@ -90,7 +93,12 @@ export class MmscreenComponent implements OnInit {
 
   constructor() {}
 
-  public ngOnInit() {}
+  public ngOnInit() {
+    this.disableNewSetting$ = combineLatest(
+      this.memberSettings$.asObservable(),
+      this.data$,
+    ).pipe(map(([settings, data]) => settings.length === data.length));
+  }
 
   public closeModal(event: MouseEvent) {
     this.showModal = false;
@@ -104,8 +112,33 @@ export class MmscreenComponent implements OnInit {
   }
 
   public displayModal(event: MouseEvent) {
-    this.showModal = true;
     event.preventDefault();
+    this.showModal = true;
+  }
+
+  public addNewSetting(event: MouseEvent) {
+    event.preventDefault();
+    combineLatest(
+      this.memberSettings$.asObservable(),
+      this.data$,
+    )
+    .pipe(take(1))
+    .subscribe(
+      ([settings, data]) => {
+        if (settings.length < data.length) {
+          this.memberSettings$.next(
+            [
+              ... settings,
+              {
+                person_id: '',
+                role: '',
+                access_level: '',
+              },
+            ],
+          );
+        }
+      },
+    );
   }
 
   public setChanged(event: MemberSetting) {
