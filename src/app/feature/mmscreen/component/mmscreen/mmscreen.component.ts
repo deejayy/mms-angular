@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList, Output, EventEmitter } from '@angular/core';
 import { of, Observable, BehaviorSubject, combineLatest } from 'rxjs';
 import { MemberSetComponent } from '../member-set/member-set.component';
 import { take, map } from 'rxjs/operators';
@@ -18,12 +18,17 @@ export interface MemberSetting {
   access_level: string;
 }
 
+export interface SaveRequest {
+  members: MemberSetting[];
+}
+
 @Component({
   selector: 'app-mmscreen',
   templateUrl: './mmscreen.component.html',
   styleUrls: ['./mmscreen.component.scss'],
 })
 export class MmscreenComponent implements OnInit {
+  @Output() public save: EventEmitter<SaveRequest> = new EventEmitter<SaveRequest>();
   public disableNewSetting$: Observable<boolean> = of(false);
   public changed: boolean = false;
 
@@ -155,5 +160,12 @@ export class MmscreenComponent implements OnInit {
 
   public removeRow(personId: string) {
     this.memberSettings$.next(this.memberSettings$.getValue().filter(setting => setting.person_id !== personId));
+  }
+
+  public saveEvent(event: MouseEvent) {
+    // this.save.emit
+    console.warn({
+      members: this.memberSettings$.getValue().filter(setting => !!setting.person_id),
+    });
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Observable, combineLatest, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, combineLatest, Subscription, of } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 import { DataRow, MemberSetting } from '../mmscreen/mmscreen.component';
 
 export interface Role {
@@ -43,6 +43,35 @@ export const roleList: Role[] = [
     value: 'manager',
   },
 ];
+
+export const roleLevelMap = {
+  customer: [
+    {
+      name: 'Read',
+      value: 'read',
+    },
+    {
+      name: 'Write',
+      value: 'write',
+    },
+  ],
+  employee: [
+    {
+      name: 'Write',
+      value: 'write',
+    },
+    {
+      name: 'Admin',
+      value: 'admin',
+    },
+  ],
+  manager: [
+    {
+      name: 'Admin',
+      value: 'admin',
+    },
+  ],
+};
 
 @Component({
   selector: 'app-member-set',
@@ -105,7 +134,7 @@ export class MemberSetComponent implements OnInit, OnChanges, OnDestroy {
 
   public roles: Role[] = roleList;
 
-  public accessLevels: AccessLevel[] = accessLevels;
+  public accessLevels$: Observable<AccessLevel[]>;
 
   public memberForm: FormGroup;
 
@@ -136,14 +165,19 @@ export class MemberSetComponent implements OnInit, OnChanges, OnDestroy {
         this.change.emit(value);
       }),
     );
+
+    this.accessLevels$ = this.memberForm.valueChanges.pipe(
+      startWith(this.memberForm.value),
+      map(value => roleLevelMap[value.role]),
+    );
   }
 
   public ngOnChanges(changes: SimpleChanges) {
     if (changes.data.currentValue) {
       this.memberForm.setValue({
         personId: changes.data.currentValue.person_id || '',
-        role: changes.data.currentValue.role || '',
-        accessLevel: changes.data.currentValue.access_level || '',
+        role: changes.data.currentValue.role || 'customer',
+        accessLevel: changes.data.currentValue.access_level || 'read',
       }, { emitEvent: false });
     }
   }

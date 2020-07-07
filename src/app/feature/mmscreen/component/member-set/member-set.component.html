@@ -11,7 +11,7 @@
   </div>
   <div class="access-level">
     <select class="select access-level-select" name="" id="" formControlName="accessLevel">
-      <option *ngFor="let accessLevel of accessLevels" [value]="accessLevel.value">{{ accessLevel.name }}</option>
+      <option *ngFor="let accessLevel of accessLevels$ | async" [value]="accessLevel.value">{{ accessLevel.name }}</option>
     </select>
   </div>
   <div class="remove" (click)="removeRow($event)">

@@ -3,7 +3,7 @@
     <div class="name">Csaba SZELL</div>
     <div class="controls">
       <button class="new-member" (click)="displayModal($event)">New member</button>
-      <button class="save-changes-button" *ngIf="changed">Save Changes</button>
+      <button class="save-changes-button" *ngIf="changed" (click)="saveEvent($event)">Save Changes</button>
     </div>
   </div>
 
