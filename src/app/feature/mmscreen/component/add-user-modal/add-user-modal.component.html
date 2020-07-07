@@ -1,0 +1,45 @@
+<div class="modal-wrapper">
+  <div class="modal-header">
+    <div class="modal-title">Create member</div>
+    <div class="modal-close" (click)="closeModal($event)">
+      <img class="close-icon" src="/assets/icons/close-gray.svg" alt="Close modal">
+    </div>
+  </div>
+  <div class="modal-content">
+    <div class="modal-form">
+      <div class="section-left">
+        <div class="input-block">
+          <label for="first-name">First name <span class="required">*</span></label>
+          <input class="text-input" type="text" id="first-name">
+        </div>
+        <div class="input-block">
+          <label for="last-name">Last name <span class="required">*</span></label>
+          <input class="text-input" type="text" id="last-name">
+        </div>
+        <div class="checkbox-block">
+          <input class="checkbox" type="checkbox" id="user-status">
+          <label for="user-status">
+            User status
+          </label>
+        </div>
+        <div class="checkbox-note">
+          Designates whether the person can login into application
+        </div>
+      </div>
+      <div class="section-right">
+        <div class="input-block">
+          <label for="title">Title</label>
+          <input class="text-input" type="text" id="title">
+        </div>
+        <div class="input-block">
+          <label for="business-unit">Business Unit</label>
+          <input class="text-input" type="text" id="business-unit">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-controls">
+    <div class="cancel-text" (click)="closeModal($event)">Cancel</div>
+    <button class="create-member-button">Create Member</button>
+  </div>
+</div>

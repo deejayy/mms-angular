@@ -2,76 +2,8 @@ import { Component, OnInit, Input, OnChanges, SimpleChanges, Output, EventEmitte
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable, combineLatest, Subscription, of } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { DataRow, MemberSetting } from '../mmscreen/mmscreen.component';
-
-export interface Role {
-  name: string;
-  value: string;
-}
-
-export interface AccessLevel {
-  name: string;
-  value: string;
-}
-
-export const accessLevels: AccessLevel[] = [
-  {
-    name: 'Read',
-    value: 'read',
-  },
-  {
-    name: 'Write',
-    value: 'write',
-  },
-  {
-    name: 'Admin',
-    value: 'admin',
-  },
-];
-
-export const roleList: Role[] = [
-  {
-    name: 'Customer',
-    value: 'customer',
-  },
-  {
-    name: 'Employee',
-    value: 'employee',
-  },
-  {
-    name: 'Manager',
-    value: 'manager',
-  },
-];
-
-export const roleLevelMap = {
-  customer: [
-    {
-      name: 'Read',
-      value: 'read',
-    },
-    {
-      name: 'Write',
-      value: 'write',
-    },
-  ],
-  employee: [
-    {
-      name: 'Write',
-      value: 'write',
-    },
-    {
-      name: 'Admin',
-      value: 'admin',
-    },
-  ],
-  manager: [
-    {
-      name: 'Admin',
-      value: 'admin',
-    },
-  ],
-};
+import { AccessLevel, Role, MemberSetting, DataRow } from '../../model/mmscreen.model';
+import { roleList, roleLevelMap } from '../../model/member-set.model';
 
 @Component({
   selector: 'app-member-set',
@@ -88,54 +20,8 @@ export class MemberSetComponent implements OnInit, OnChanges, OnDestroy {
   private subs: Subscription = new Subscription();
 
   public filteredUsers$: Observable<DataRow[]>;
-
-  public users: any[] = [
-    {
-      person_id: '7e3b1912-efb8-41bd-851f-e7f5a45341e9',
-      firstname: 'Clifford',
-      lastname: 'Mowery',
-      title: 'Electronics technician',
-      business_unit: 'Manufacturing',
-      is_user: true,
-    },
-    {
-      person_id: '05c34c2c-1d0c-4454-ac2a-56f66fa550f7',
-      firstname: 'Maria',
-      lastname: 'Anderson',
-      title: 'Recording engineer',
-      business_unit: 'Manufacturing',
-      is_user: true,
-    },
-    {
-      person_id: '0bef3100-e1cc-4b53-81b4-a7ed43422973',
-      firstname: 'Mark',
-      lastname: 'Sim',
-      title: 'Nuclear engineer',
-      business_unit: 'Operations',
-      is_user: true,
-    },
-    {
-      person_id: 'caa6bb48-0160-470e-991e-59057fad5301',
-      firstname: 'Jonathan',
-      lastname: 'McCutcheon',
-      title: '',
-      business_unit: '',
-      is_user: false,
-    },
-    {
-      person_id: '476c949d-9374-4e9e-9f82-d519ba0c0839',
-      firstname: 'Henry K',
-      lastname: 'Garcia',
-      title: 'Head of Sales',
-      business_unit: '',
-      is_user: false,
-    },
-  ];
-
   public roles: Role[] = roleList;
-
   public accessLevels$: Observable<AccessLevel[]>;
-
   public memberForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder) {
