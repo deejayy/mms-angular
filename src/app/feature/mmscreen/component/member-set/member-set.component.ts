@@ -38,11 +38,13 @@ export class MemberSetComponent implements OnInit, OnChanges, OnDestroy {
       this.settings$,
     ).pipe(
       map(([users, settings]) => {
-        return users.filter(user => {
-          return !settings
-            .map(setting => setting.person_id)
-            .includes(user.person_id) || user.person_id === this.memberForm.get('personId').value;
-        });
+        return users && users.length && settings && settings.length
+          ? users.filter(user => {
+              return !settings
+                .map(setting => setting.person_id)
+                .includes(user.person_id) || user.person_id === this.memberForm.get('personId').value;
+            })
+          : [];
       }),
     );
 

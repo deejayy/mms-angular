@@ -5,6 +5,9 @@ import { take, map } from 'rxjs/operators';
 import { SaveRequest, DataRow, MemberSetting } from '../../model/mmscreen.model';
 import { initialMemberSettings } from '../../mock/member-settings.mock';
 import { mmScreenResponse } from '../../mock/backend-response.mock';
+import { ApiFacade } from '@app/core/api/store/api.facade';
+import { ApiCallItem } from '@app/core/api/model/api-call-item.model';
+import { ApiResultState } from '@app/core/api/store/api.state';
 
 @Component({
   selector: 'app-mmscreen',
@@ -19,18 +22,25 @@ export class MmscreenComponent implements OnInit {
   public data$: Observable<DataRow[]> = of(mmScreenResponse);
 
   public showModal: boolean = false;
+  public response: ApiResultState;
 
   @ViewChildren(MemberSetComponent) public memberSets: QueryList<MemberSetComponent>;
 
   public memberSettings$: BehaviorSubject<MemberSetting[]> = new BehaviorSubject(initialMemberSettings);
 
-  constructor() {}
+  constructor(private apiFacade: ApiFacade) {
+    const apiCall: ApiCallItem = { url: '/assets/mock-data.json' };
+    this.apiFacade.callApi(apiCall);
+    this.response = this.apiFacade.createApiResults(apiCall);
+    this.data$ = this.response.data$.pipe(map(data => data ? Object.values(data) : []));
 
-  public ngOnInit() {
     this.disableNewSetting$ = combineLatest(
       this.memberSettings$.asObservable(),
       this.data$,
-    ).pipe(map(([settings, data]) => settings.length === data.length));
+    ).pipe(map(([settings, data]) => settings && data && settings.length === data.length));
+  }
+
+  public ngOnInit() {
   }
 
   public closeModal(event: MouseEvent) {
