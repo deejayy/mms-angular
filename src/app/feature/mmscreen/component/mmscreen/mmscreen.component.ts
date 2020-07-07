@@ -159,6 +159,7 @@ export class MmscreenComponent implements OnInit {
   }
 
   public removeRow(personId: string) {
+    this.changed = true;
     this.memberSettings$.next(this.memberSettings$.getValue().filter(setting => setting.person_id !== personId));
   }
 

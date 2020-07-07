@@ -37,7 +37,12 @@
       false
     ],
     "forin": true,
-    "function-name": true,
+    "function-name": [
+      true,
+      {
+        "static-method-regex": "^[A-Za-z_\\d]+$"
+      }
+    ],
     "import-blacklist": false,
     "import-spacing": true,
     "indent": [
