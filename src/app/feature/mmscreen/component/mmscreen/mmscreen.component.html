@@ -1,9 +1,9 @@
 <div class="mmscreen">
-  <div class="mmscreen-header">
+  <div class="mmscreen-header mmscreen-header_changedd">
     <div class="name">Csaba SZELL</div>
     <div class="controls">
       <button class="new-member" (click)="displayModal($event)">New member</button>
-      <button class="create-member-button">Save Changes</button>
+      <button class="save-changes-button">Save Changes</button>
     </div>
   </div>
 
@@ -15,24 +15,7 @@
         <div class="access-level">Access Level</div>
       </div>
       <div class="table-row">
-        <div class="member">
-          <select class="select member-select" name="" id="">
-            <option *ngFor="let user of data" [value]='user.person_id'>{{ user.lastname }} {{ user.firstname }}</option>
-          </select>
-        </div>
-        <div class="role">
-          <select class="select role-select" name="" id="">
-            <option *ngFor="let role of roles" [value]="role.value">{{ role.name }}</option>
-          </select>
-        </div>
-        <div class="access-level">
-          <select class="select access-level-select" name="" id="">
-            <option *ngFor="let accessLevel of accessLevels" [value]="accessLevel.value">{{ accessLevel.name }}</option>
-          </select>
-        </div>
-        <div class="remove">
-          <img class="remove-icon" src="https://d1icd6shlvmxi6.cloudfront.net/gsc/5GQ71W/9c/3e/a0/9c3ea0c23cea404fb49d1e89ce31b1e2/images/membership_management_screen/u17.svg?token=48ef64b2a1f767b0212ccb0f0bf006ac92bbf6aff620a30de2ef643661df895b" alt="Remove user">
-        </div>
+        <app-member-set></app-member-set>
       </div>
       <div class="footnote">
         <a href='' (click)="displayModal($event)">Add new member</a>
@@ -46,7 +29,7 @@
     <div class="modal-header">
       <div class="modal-title">Create member</div>
       <div class="modal-close" (click)="closeModal($event)">
-        <img class="close-icon" src="https://d1icd6shlvmxi6.cloudfront.net/gsc/5GQ71W/9c/3e/a0/9c3ea0c23cea404fb49d1e89ce31b1e2/images/membership_management_screen/u33.svg?token=8f4d6803befe5998c758feb46f0f47faa758f34230d5bd7092fadb3a03127242" alt="Clsoe modal">
+        <img class="close-icon" src="/assets/icons/close-gray.svg" alt="Close modal">
       </div>
     </div>
     <div class="modal-content">

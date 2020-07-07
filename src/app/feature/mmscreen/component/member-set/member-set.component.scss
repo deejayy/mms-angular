@@ -1,0 +1,52 @@
+@import "app-theme.scss";
+
+:host {
+  display: flex;
+  margin: auto 0;
+}
+
+.select {
+  height: 30px;
+  padding: 3px 2px 3px 2px;
+  font-size: 13px;
+  color: black;
+  border: 1px solid rgba(170, 170, 170, 1);
+  border-radius: 5px;
+}
+
+.remove {
+  cursor: pointer;
+  padding: 7px;
+  display: flex;
+  justify-content: flex-end;
+  flex-grow: 1;
+
+  &-icon {
+    width: 15px;
+    height: 15px;
+  }
+}
+
+.member {
+  width: 335px;
+
+  &-select {
+    width: 225px;
+  }
+}
+
+.role {
+  width: 245px;
+
+  &-select {
+    width: 170px;
+  }
+}
+
+.access-level {
+  width: 445px;
+
+  &-select {
+    width: 170px;
+  }
+}
