@@ -54,6 +54,7 @@ export class MemberSetComponent implements OnInit, OnChanges, OnDestroy {
   @Input() public users$: Observable<DataRow[]>;
   @Input() public settings$: Observable<MemberSetting[]>;
   @Output() public change: EventEmitter<MemberSetting> = new EventEmitter<MemberSetting>();
+  @Output() public remove: EventEmitter<string> = new EventEmitter<string>();
 
   private subs: Subscription = new Subscription();
 
@@ -145,6 +146,10 @@ export class MemberSetComponent implements OnInit, OnChanges, OnDestroy {
         accessLevel: changes.data.currentValue.access_level || '',
       }, { emitEvent: false });
     }
+  }
+
+  public removeRow(event: MouseEvent) {
+    this.remove.emit(this.memberForm.get('personId').value);
   }
 
   public ngOnDestroy() {

@@ -25,6 +25,7 @@ export interface MemberSetting {
 })
 export class MmscreenComponent implements OnInit {
   public disableNewSetting$: Observable<boolean> = of(false);
+  public changed: boolean = false;
 
   public data$: Observable<DataRow[]> = of([
     {
@@ -142,6 +143,7 @@ export class MmscreenComponent implements OnInit {
   }
 
   public setChanged(event: MemberSetting) {
+    this.changed = true;
     this.memberSettings$.next(
       this.memberSets.toArray().map(memberSetComponent => ({
         person_id: memberSetComponent.memberForm.value.personId,
@@ -149,5 +151,9 @@ export class MmscreenComponent implements OnInit {
         access_level: memberSetComponent.memberForm.value.accessLevel,
       })),
     );
+  }
+
+  public removeRow(personId: string) {
+    this.memberSettings$.next(this.memberSettings$.getValue().filter(setting => setting.person_id !== personId));
   }
 }

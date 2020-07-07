@@ -14,7 +14,7 @@
       <option *ngFor="let accessLevel of accessLevels" [value]="accessLevel.value">{{ accessLevel.name }}</option>
     </select>
   </div>
-  <div class="remove">
+  <div class="remove" (click)="removeRow($event)">
     <img class="remove-icon" src="/assets/icons/close-blue.svg" alt="Remove user">
   </div>
 </form>

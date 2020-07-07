@@ -12,7 +12,7 @@
     height: 80px;
     align-items: center;
 
-    &_changed {
+    &.changed {
       background-color: rgba(255, 251, 210, 1);
 
       & .name {

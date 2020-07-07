@@ -1,9 +1,9 @@
 <div class="mmscreen">
-  <div class="mmscreen-header mmscreen-header_changedd">
+  <div class="mmscreen-header" [ngClass]="{ changed: changed }">
     <div class="name">Csaba SZELL</div>
     <div class="controls">
       <button class="new-member" (click)="displayModal($event)">New member</button>
-      <button class="save-changes-button">Save Changes</button>
+      <button class="save-changes-button" *ngIf="changed">Save Changes</button>
     </div>
   </div>
 
@@ -15,7 +15,7 @@
         <div class="access-level">Access Level</div>
       </div>
       <div class="table-row" *ngFor="let member of memberSettings$ | async">
-        <app-member-set [data]="member" [users$]="data$" [settings$]="memberSettings$" (change)="setChanged($event)"></app-member-set>
+        <app-member-set [data]="member" [users$]="data$" [settings$]="memberSettings$" (change)="setChanged($event)" (remove)="removeRow($event)"></app-member-set>
       </div>
       <div class="footnote">
         <a class="add-new-setting" href='' (click)="addNewSetting($event)" [ngClass]="{ disabled: disableNewSetting$ | async }">Add new member</a>
