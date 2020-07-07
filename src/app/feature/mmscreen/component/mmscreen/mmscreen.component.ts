@@ -1,13 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
+import { of, Observable, BehaviorSubject } from 'rxjs';
+import { MemberSetComponent } from '../member-set/member-set.component';
 
-export interface Role {
-  name: string;
-  value: string;
+export interface DataRow {
+  person_id: string;
+  firstname: string;
+  lastname: string;
+  title: string;
+  business_unit: string;
+  is_user: boolean;
 }
 
-export interface AccessLevel {
-  name: string;
-  value: string;
+export interface MemberSetting {
+  person_id: string;
+  role: string;
+  access_level: string;
 }
 
 @Component({
@@ -16,7 +23,7 @@ export interface AccessLevel {
   styleUrls: ['./mmscreen.component.scss'],
 })
 export class MmscreenComponent implements OnInit {
-  public data = [
+  public data$: Observable<DataRow[]> = of([
     {
       person_id: '7e3b1912-efb8-41bd-851f-e7f5a45341e9',
       firstname: 'Clifford',
@@ -57,39 +64,29 @@ export class MmscreenComponent implements OnInit {
       business_unit: '',
       is_user: false,
     },
-  ];
-
-  public roles: Role[] = [
-    {
-      name: 'Customer',
-      value: 'customer',
-    },
-    {
-      name: 'Employee',
-      value: 'employee',
-    },
-    {
-      name: 'Manager',
-      value: 'manager',
-    },
-  ];
-
-  public accessLevels: AccessLevel[] = [
-    {
-      name: 'Read',
-      value: 'read',
-    },
-    {
-      name: 'Write',
-      value: 'write',
-    },
-    {
-      name: 'Admin',
-      value: 'admin',
-    },
-  ];
+  ]);
 
   public showModal: boolean = false;
+
+  @ViewChildren(MemberSetComponent) public memberSets: QueryList<MemberSetComponent>;
+
+  public memberSettings$: BehaviorSubject<MemberSetting[]> = new BehaviorSubject([
+    {
+      person_id: '7e3b1912-efb8-41bd-851f-e7f5a45341e9',
+      role: 'customer',
+      access_level: 'read',
+    },
+    {
+      person_id: '05c34c2c-1d0c-4454-ac2a-56f66fa550f7',
+      role: 'manager',
+      access_level: 'admin',
+    },
+    {
+      person_id: '0bef3100-e1cc-4b53-81b4-a7ed43422973',
+      role: 'employee',
+      access_level: 'write',
+    },
+  ]);
 
   constructor() {}
 
@@ -109,5 +106,15 @@ export class MmscreenComponent implements OnInit {
   public displayModal(event: MouseEvent) {
     this.showModal = true;
     event.preventDefault();
+  }
+
+  public setChanged(event: MemberSetting) {
+    this.memberSettings$.next(
+      this.memberSets.toArray().map(memberSetComponent => ({
+        person_id: memberSetComponent.memberForm.value.personId,
+        role: memberSetComponent.memberForm.value.role,
+        access_level: memberSetComponent.memberForm.value.accessLevel,
+      })),
+    );
   }
 }

@@ -14,8 +14,8 @@
         <div class="role">Role</div>
         <div class="access-level">Access Level</div>
       </div>
-      <div class="table-row">
-        <app-member-set></app-member-set>
+      <div class="table-row" *ngFor="let member of memberSettings$ | async">
+        <app-member-set [data]="member" [users$]="data$" [settings$]="memberSettings$" (change)="setChanged($event)"></app-member-set>
       </div>
       <div class="footnote">
         <a href='' (click)="displayModal($event)">Add new member</a>
@@ -33,7 +33,7 @@
       </div>
     </div>
     <div class="modal-content">
-      <form class="modal-form">
+      <div class="modal-form">
         <div class="section-left">
           <div class="input-block">
             <label for="first-name">First name <span class="required">*</span></label>
@@ -63,7 +63,7 @@
             <input class="text-input" type="text" id="business-unit">
           </div>
         </div>
-      </form>
+      </div>
     </div>
     <div class="modal-controls">
       <div class="cancel-text" (click)="closeModal($event)">Cancel</div>

@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MmscreenComponent } from './mmscreen.component';
+import { MemberSetComponent } from '../member-set/member-set.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('MmscreenComponent', () => {
   let component: MmscreenComponent;
@@ -8,7 +10,8 @@ describe('MmscreenComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [MmscreenComponent],
+      declarations: [MmscreenComponent, MemberSetComponent],
+      imports: [ReactiveFormsModule],
     }).compileComponents();
   }));
 

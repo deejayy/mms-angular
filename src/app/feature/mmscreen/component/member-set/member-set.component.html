@@ -1,18 +1,20 @@
-<div class="member">
-  <select class="select member-select" name="" id="">
-    <option *ngFor="let user of data" [value]='user.person_id'>{{ user.lastname }} {{ user.firstname }}</option>
-  </select>
-</div>
-<div class="role">
-  <select class="select role-select" name="" id="">
-    <option *ngFor="let role of roles" [value]="role.value">{{ role.name }}</option>
-  </select>
-</div>
-<div class="access-level">
-  <select class="select access-level-select" name="" id="">
-    <option *ngFor="let accessLevel of accessLevels" [value]="accessLevel.value">{{ accessLevel.name }}</option>
-  </select>
-</div>
-<div class="remove">
-  <img class="remove-icon" src="/assets/icons/close-blue.svg" alt="Remove user">
-</div>
+<form class="member-form" [formGroup]="memberForm">
+  <div class="member">
+    <select class="select member-select" name="" id="" formControlName="personId">
+      <option *ngFor="let user of filteredUsers$ | async" [value]='user.person_id'>{{ user.lastname }} {{ user.firstname }}</option>
+    </select>
+  </div>
+  <div class="role">
+    <select class="select role-select" name="" id="" formControlName="role">
+      <option *ngFor="let role of roles" [value]="role.value">{{ role.name }}</option>
+    </select>
+  </div>
+  <div class="access-level">
+    <select class="select access-level-select" name="" id="" formControlName="accessLevel">
+      <option *ngFor="let accessLevel of accessLevels" [value]="accessLevel.value">{{ accessLevel.name }}</option>
+    </select>
+  </div>
+  <div class="remove">
+    <img class="remove-icon" src="/assets/icons/close-blue.svg" alt="Remove user">
+  </div>
+</form>
