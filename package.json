@@ -22,6 +22,10 @@
     "@angular/platform-browser": "~8.2.14",
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
+    "@ngrx/effects": "^9.2.0",
+    "@ngrx/store": "^9.2.0",
+    "@ngrx/store-devtools": "^9.2.0",
+    "immer": "^7.0.5",
     "modern-css-reset": "^1.1.0",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
@@ -86,6 +90,9 @@
     ],
     "moduleNameMapper": {
       "@app/(.*)": "<rootDir>/src/app/$1",
+      "@core/(.*)": "<rootDir>/src/app/core/$1",
+      "@shared/(.*)": "<rootDir>/src/app/shared/$1",
+      "@feature/(.*)": "<rootDir>/src/app/feature/$1",
       "@env/(.*)": "<rootDir>/src/environments/$1"
     }
   }
