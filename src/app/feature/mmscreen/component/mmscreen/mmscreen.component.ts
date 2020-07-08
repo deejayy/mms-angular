@@ -8,6 +8,7 @@ import { mmScreenResponse } from '../../mock/backend-response.mock';
 import { ApiFacade } from '@app/core/api/store/api.facade';
 import { ApiCallItem } from '@app/core/api/model/api-call-item.model';
 import { ApiResultState } from '@app/core/api/store/api.state';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-mmscreen',
@@ -20,6 +21,8 @@ export class MmscreenComponent implements OnInit {
   public changed: boolean = false;
 
   public data$: Observable<DataRow[]> = of(mmScreenResponse);
+  public error$: Observable<boolean>;
+  public errorData$: Observable<HttpErrorResponse>;
 
   public showModal: boolean = false;
   public response: ApiResultState;
@@ -33,6 +36,8 @@ export class MmscreenComponent implements OnInit {
     this.apiFacade.callApi(apiCall);
     this.response = this.apiFacade.createApiResults(apiCall);
     this.data$ = this.response.data$.pipe(map(data => data ? Object.values(data) : []));
+    this.error$ = this.response.error$;
+    this.errorData$ = this.response.errorData$;
 
     this.disableNewSetting$ = combineLatest(
       this.memberSettings$.asObservable(),

@@ -8,7 +8,7 @@
   </div>
 
   <div class="members">
-    <div class="table">
+    <div class="table" *ngIf="!(error$ | async); else displayerror">
       <div class="table-header">
         <div class="member">Member</div>
         <div class="role">Role</div>
@@ -22,7 +22,14 @@
       </div>
     </div>
   </div>
+
+  <ng-template #displayerror>
+    <div class="error">
+      Can't load user list: {{ (errorData$ | async)?.statusText }} ({{ (errorData$ | async)?.status }})
+    </div>
+  </ng-template>
 </div>
+
 
 <div class="modal" *ngIf="showModal" (click)="overlayClick($event)">
   <app-add-user-modal (close)="closeModal($event)"></app-add-user-modal>
