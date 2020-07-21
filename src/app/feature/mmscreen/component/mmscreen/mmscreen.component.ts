@@ -100,9 +100,13 @@ export class MmscreenComponent implements OnInit {
     );
   }
 
-  public removeRow(personId: string) {
+  public removeRow(personId: string, idx: number) {
     this.changed = true;
-    this.memberSettings$.next(this.memberSettings$.getValue().filter(setting => setting.person_id !== personId));
+    if (personId) {
+      this.memberSettings$.next(this.memberSettings$.getValue().filter(setting => setting.person_id !== personId));
+    } else {
+      this.memberSettings$.next(this.memberSettings$.getValue().filter((_, index) => index !== idx));
+    }
   }
 
   public saveEvent(event: MouseEvent) {

@@ -14,8 +14,8 @@
         <div class="role">Role</div>
         <div class="access-level">Access Level</div>
       </div>
-      <div class="table-row" *ngFor="let member of memberSettings$ | async">
-        <app-member-set [data]="member" [users$]="data$" [settings$]="memberSettings$" (change)="setChanged($event)" (remove)="removeRow($event)"></app-member-set>
+      <div class="table-row" *ngFor="let member of memberSettings$ | async; let idx = index">
+        <app-member-set [data]="member" [users$]="data$" [settings$]="memberSettings$" (change)="setChanged($event)" (remove)="removeRow($event, idx)"></app-member-set>
       </div>
       <div class="footnote">
         <a class="add-new-setting" href='' (click)="addRow($event)" [ngClass]="{ disabled: disableNewSetting$ | async }">Add new member</a>

@@ -54,6 +54,15 @@ export class MemberSetComponent implements OnInit, OnChanges, OnDestroy {
       }),
     );
 
+    this.subs.add(
+      this.memberForm.get('role').valueChanges.subscribe(role => {
+        const levels = roleLevelMap[role].map(mapRole => mapRole.value);
+        if (!levels.includes(this.memberForm.get('accessLevel').value)) {
+          this.memberForm.get('accessLevel').setValue(levels[0], { emitEvent: false });
+        }
+      }),
+    );
+
     this.accessLevels$ = this.memberForm.valueChanges.pipe(
       startWith(this.memberForm.value),
       map(value => roleLevelMap[value.role]),
